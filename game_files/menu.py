@@ -6,8 +6,11 @@ import os
 class MenuClass:
     text = general_functions.parse_program_text(os.path.realpath('..\\localisation\\english_language.json'))
 
+    def launch_selected_action(self):
+        pass
+
     def choosing_action(self):
-        num_of_action = input(self.text['menu_text'])
+        num_of_action = input(f"{self.text['greeting'], self.text['menu_text']")
         while True:
             if not num_of_action in '123':
                 num_of_action = input(random.choice(self.text['not_correct_value']))
@@ -19,4 +22,4 @@ class MenuClass:
 
 
 menu = MenuClass()
-menu.choosing_action()
+menu.main()
