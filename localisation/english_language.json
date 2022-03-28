@@ -3,5 +3,6 @@
   "menu_text" : "Choose the action by num:\n1. To start a game\n2. To check a leaderboard\n3. To exit from the game\n= ",
   "not_correct_value" : ["Incorrect value was inputted! Please, try again.\n= ",
                          "This value doesn't fit! Maybe you should try once more time...\n= ",
-                         "Error! Not suitable value! Please, choose value from the given list!\n= "]
+                         "Error! Not suitable value! Please, choose value from the given list!\n= "],
+  "parting" : "See you!"
 }
