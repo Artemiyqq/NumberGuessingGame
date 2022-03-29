@@ -1,4 +1,7 @@
-import random, general_functions, os, sys
+import random
+import general_functions
+import os
+import sys
 
 
 class MenuClass:

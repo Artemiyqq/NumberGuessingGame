@@ -4,5 +4,16 @@
   "not_correct_value" : ["Incorrect value was inputted! Please, try again.\n= ",
                          "This value doesn't fit! Maybe you should try once more time...\n= ",
                          "Error! Not suitable value! Please, choose value from the given list!\n= "],
-  "parting" : "See you!"
+  "parting" : "See you!",
+  "top10" : ["Leader Board:",
+             "Top 1: ",
+             "Top 2: ",
+             "Top 3: ",
+             "Top 4: ",
+             "Top 5: ",
+             "Top 6: ",
+             "Top 7: ",
+             "Top 8: ",
+             "Top 9: ",
+             "Top 10: "]
 }
