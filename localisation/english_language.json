@@ -15,5 +15,11 @@
              "Top 8 -",
              "Top 9 -",
              "Top 10 -"],
-  "leader_board_menu" : "\nTo return to menu enter 'yes',\nif you want to exit from game enter 'no'\n= "
+  "leader_board_menu" : "\nTo return to menu enter 'yes',\nif you want to exit from game enter 'no'\n= ",
+  "game_logging_menu" : ["Choose the action by num:\n",
+                         "1. I already have a game account\n",
+                         "2. I want to create a game account\n",
+                         "3. I want to play without an account(you will not be able to get into Leader Board\n= "]
+
+
 }

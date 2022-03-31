@@ -4,6 +4,7 @@ import sys
 from os.path import exists
 from configparser import ConfigParser
 import psycopg2
+import random
 
 
 def is_file_exist(file_name):
@@ -44,3 +45,12 @@ def querying_data(query, db_params_loc="database.ini"):
     finally:
         if connection is not None:
             connection.close()
+
+
+def get_correct_value(correct_values, error_messages):
+    num_of_action = input()
+    while True:
+        if not num_of_action in correct_values:
+            num_of_action = input(random.choice(error_messages))
+        else:
+            return num_of_action
