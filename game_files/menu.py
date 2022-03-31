@@ -32,8 +32,12 @@ class LeaderBoardClass:
 
 
 class GameClass:
+    log_db_data = general_functions.querying_data("SELECT * FROM users", os.path.realpath("..\\database.ini"))
     player_name = ""
     player_password = ""
+
+    def get_log_data(self):
+        self.log_db_data = general_functions.querying_data("SELECT * FROM users", os.path.realpath("..\\database.ini"))
 
     def account_menu(self):
         print(''.join(self.text["game_logging_menu"]))
@@ -45,7 +49,10 @@ class GameClass:
                 pass
 
     def account_sign_in(self):
-        pass
+        remaining_log_attempts = 5
+        self.get_log_data()
+        while True:
+            s
 
     def game_main(self, text):
         self.text = text
