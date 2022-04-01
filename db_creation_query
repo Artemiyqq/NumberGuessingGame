@@ -1,0 +1,13 @@
+CREATE DATABASE numberguessinggame;
+
+CREATE TABLE leader_board
+(
+	username CHARACTER VARYING(15),
+	userscore SMALLINT
+);
+
+CREATE TABLE users
+(
+	username CHARACTER VARYING(15),
+	userpassword CHARACTER VARYING(15)
+);
