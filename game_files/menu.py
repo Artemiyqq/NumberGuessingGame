@@ -33,10 +33,13 @@ class LeaderBoardClass:
 
 class AuthorizationClass:
     player_name = ""
+    player_name_entered = False
     player_password = ""
+    player_password_entered = False
+    remaining_log_attempts = 5
 
     def account_menu(self):
-        print(''.join(self.text["game_logging_menu"]))
+        print(''.join(self.text["game_logging_menu"]), end='')
         match general_functions.get_correct_number('123', self.text['not_correct_value']):
             case '1': self.account_sign_in()
             case '2':
@@ -45,18 +48,43 @@ class AuthorizationClass:
                 pass
 
     def account_sign_in(self):
-        remaining_log_attempts = 5
         while True:
-            if remaining_log_attempts == 0:
-                match general_functions.get_yes_no(self.text['after_errors_offer'],self.text['not_correct_value']):
-                    case 'yes':
-                        self.account_menu()
-                        break
-                    case 'no':
-                        remaining_log_attempts = 5
+            if self.remaining_log_attempts == 0:
+                self.zero_log_attempts()
+            elif not self.player_name_entered:
+                self.login_enter()
+            elif not self.player_password_entered:
+                self.password_enter()
+            else:
+                break
 
-    def authorization_main(self,texte):
-        self.texte = texte
+    def zero_log_attempts(self):
+        match general_functions.get_yes_no(self.text['after_errors_offer'], self.text['not_correct_value']):
+            case 'yes':
+                return self.account_menu()
+            case 'no':
+                self.remaining_log_attempts = 5
+
+    def login_enter(self):
+        name_query = f'SELECT userpassword FROM users WHERE username = "{self.player_name}"'
+        player_name = input(self.text['sing_in_messages'][0]['login'])
+        if len(general_functions.querying_data(name_query)) > 0:
+            self.player_name = player_name
+            self.player_name_entered = True
+        else:
+            print(random.choice(self.text['not_correct_value']))
+
+    def password_enter(self):
+        password_query = f'SELECT userpassword FROM users WHERE username = "{self.player_name}"'
+        player_password = input(self.text['sing_in_messages'][0]['password'])
+        if general_functions.querying_data(password_query) == player_password:
+            self.player_password = player_password
+            self.player_password_entered = True
+        else:
+            print(random.choice(self.text['not_correct_value']))
+
+    def authorization_main(self, text):
+        self.text = text
         self.account_menu()
 
 
