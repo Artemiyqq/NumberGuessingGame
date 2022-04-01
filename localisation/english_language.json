@@ -19,7 +19,7 @@
   "game_logging_menu" : ["Choose the action by num:\n",
                          "1. I already have a game account\n",
                          "2. I want to create a game account\n",
-                         "3. I want to play without an account(you will not be able to get into Leader Board\n= "]
-
-
+                         "3. I want to play without an account(you will not be able to get into the Leader Board\n= "],
+  "sing_in_messages" : [{"login":  "Please, enter your login: ", "password": "Now, enter your password: "}],
+  "after_errors_offer" : "Maybe you want to return to the authorization menu?\nEnter 'yes' or 'no'\n= "
 }

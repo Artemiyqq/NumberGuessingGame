@@ -31,17 +31,13 @@ class LeaderBoardClass:
         self.leader_board_menu()
 
 
-class GameClass:
-    log_db_data = general_functions.querying_data("SELECT * FROM users", os.path.realpath("..\\database.ini"))
+class AuthorizationClass:
     player_name = ""
     player_password = ""
 
-    def get_log_data(self):
-        self.log_db_data = general_functions.querying_data("SELECT * FROM users", os.path.realpath("..\\database.ini"))
-
     def account_menu(self):
         print(''.join(self.text["game_logging_menu"]))
-        match general_functions.get_correct_value('123', self.text['not_correct_value']):
+        match general_functions.get_correct_number('123', self.text['not_correct_value']):
             case '1': self.account_sign_in()
             case '2':
                 pass
@@ -50,13 +46,24 @@ class GameClass:
 
     def account_sign_in(self):
         remaining_log_attempts = 5
-        self.get_log_data()
         while True:
-            s
+            if remaining_log_attempts == 0:
+                match general_functions.get_yes_no(self.text['after_errors_offer'],self.text['not_correct_value']):
+                    case 'yes':
+                        self.account_menu()
+                        break
+                    case 'no':
+                        remaining_log_attempts = 5
 
-    def game_main(self, text):
-        self.text = text
+    def authorization_main(self,texte):
+        self.texte = texte
         self.account_menu()
+
+
+class GameClass(AuthorizationClass):
+    def game_main(self, text):
+        self.authorization_main(self.text)
+        self.text = text
 
 
 class MenuClass(LeaderBoardClass, GameClass):
@@ -69,7 +76,7 @@ class MenuClass(LeaderBoardClass, GameClass):
             print(self.text['greeting'])
             self.menu_first_launch = False
         print(self.text['menu_text'], end='')
-        self.num_of_action = general_functions.get_correct_value('123', self.text['not_correct_value'])
+        self.num_of_action = general_functions.get_correct_number('123', self.text['not_correct_value'])
 
     def launch_selected_action(self):
         match self.num_of_action:
