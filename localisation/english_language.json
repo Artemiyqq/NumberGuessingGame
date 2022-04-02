@@ -20,6 +20,9 @@
                          "1. I already have a game account\n",
                          "2. I want to create a game account\n",
                          "3. I want to play without an account(you will not be able to get into the Leader Board\n= "],
-  "sing_in_messages" : [{"login":  "Please, enter your login: ", "password": "Now, enter your password: "}],
+  "sing_in_messages" : [{"login":  "Please, enter your login: ",
+                         "first_password_message": "Now, enter your password: ",
+                         "name_of_text": "Please, enter correct password"}],
+  "sing_in_errors" : [{"login_error":  "Such a login does not exist", "password_error": "Wrong password"}],
   "after_errors_offer" : "Maybe you want to return to the authorization menu?\nEnter 'yes' or 'no'\n= "
 }

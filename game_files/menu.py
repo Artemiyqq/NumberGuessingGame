@@ -32,6 +32,7 @@ class LeaderBoardClass:
 
 
 class AuthorizationClass:
+    db_config_location = os.path.realpath('..\\database.ini')
     player_name = ""
     player_name_entered = False
     player_password = ""
@@ -66,22 +67,23 @@ class AuthorizationClass:
                 self.remaining_log_attempts = 5
 
     def login_enter(self):
-        name_query = f'SELECT userpassword FROM users WHERE username = "{self.player_name}"'
         player_name = input(self.text['sing_in_messages'][0]['login'])
-        if len(general_functions.querying_data(name_query)) > 0:
+        name_query = f"SELECT userpassword FROM users WHERE username = '{player_name}';"
+        if len(general_functions.querying_data(name_query, self.db_config_location)) > 0:
             self.player_name = player_name
             self.player_name_entered = True
         else:
-            print(random.choice(self.text['not_correct_value']))
+            print(self.text['sing_in_errors'][0]['login_error'])
 
     def password_enter(self):
-        password_query = f'SELECT userpassword FROM users WHERE username = "{self.player_name}"'
+        first_try = True
         player_password = input(self.text['sing_in_messages'][0]['password'])
-        if general_functions.querying_data(password_query) == player_password:
+        password_query = f"SELECT userpassword FROM users WHERE username = '{self.player_name}';"
+        if general_functions.querying_data(password_query, self.db_config_location) == player_password:
             self.player_password = player_password
             self.player_password_entered = True
         else:
-            print(random.choice(self.text['not_correct_value']))
+            print(self.text['sing_in_errors'][0]['password_error'])
 
     def authorization_main(self, text):
         self.text = text

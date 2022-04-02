@@ -1,6 +1,5 @@
 import configparser
 import json
-import sys
 from os.path import exists
 from configparser import ConfigParser
 import psycopg2
@@ -19,24 +18,23 @@ def parse_program_text(file_name):
 
 
 def postgresql_config_parser(file_name='database.ini'):
-    # is_file_exist(file_name)
+    is_file_exist(file_name)
     parser = ConfigParser()
-    parser.read('database.ini')
+    parser.read(file_name)
     db = []
     try:
         for db_param in parser.items('postgresql'):
             db.append(f'{db_param[0]}={db_param[1]}')
     except configparser.NoSectionError:
         print(f'Section postgresql has not been found in your file({file_name})')
-    print(db)
     return ' '.join(db)
 
 
-def querying_data(query, db_params_loc="database.ini"):
+def querying_data(query, db_config_loc="database.ini"):
     connection = None
     query_data = []
     try:
-        connection = psycopg2.connect(postgresql_config_parser(db_params_loc))
+        connection = psycopg2.connect(postgresql_config_parser(db_config_loc))
         cursor = connection.cursor()
         cursor.execute(query)
         query_data = cursor.fetchall()
