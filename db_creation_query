@@ -9,5 +9,5 @@ CREATE TABLE leader_board
 CREATE TABLE users
 (
 	username CHARACTER VARYING(15),
-	userpassword CHARACTER VARYING(15)
+	userpassword CHARACTER VARYING(20)
 );

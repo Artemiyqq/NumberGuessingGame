@@ -25,10 +25,13 @@
                          "3. I want to play without an account(you will not be able to get into the leaderboard)\n",
                          "4. I want to return to main menu\n",
                          "= "],
-  "sing_in_messages" : [{"login":  "\nPlease, enter your login: ",
+  "sing_in_messages" : {"login":  "\nPlease, enter your login: ",
                          "correct_login": "Correct login",
-                         "password": "\nEnter your password: "}],
-  "sing_in_errors" : [{"login_error":  "Such a login does not exist", "password_error": "Wrong password"}],
+                         "password": "\nEnter your password: "},
+  "sing_in_errors" : {"login_error":  "Such a login does not exist", "password_error": "Wrong password"},
   "after_errors_offer" : "\nMaybe you want to return to the authorization menu?\nEnter 'yes' or 'no'\n= ",
-  "successful_authorization": "Authorization completed successfully. Now, you can play.\n"
+  "successful_authorization": "Authorization completed successfully. Now, you can play.\n",
+  "sing_up_messages": {"login": "Please, enter name(login) for your new account: ",
+                        "password": "Please, enter password for your new account: ",
+                        "confirm_password": "Enter your password one more time: "}
 }

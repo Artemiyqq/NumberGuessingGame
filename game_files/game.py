@@ -2,7 +2,6 @@ import random
 import general_functions
 import os
 import sys
-import pwinput
 import getpass
 
 
@@ -71,26 +70,39 @@ class AuthorizationClass:
                 self.remaining_log_attempts = 2
 
     def login_enter(self):
-        player_name = input(self.text['sing_in_messages'][0]['login'])
+        player_name = input(self.text['sing_in_messages']['login'])
         name_query = f"SELECT userpassword FROM users WHERE username = '{player_name}';"
         if len(general_functions.querying_data(name_query, self.db_config_location)) > 0:
-            print(self.text['sing_in_messages'][0]['correct_login'])
+            print(self.text['sing_in_messages']['correct_login'])
             self.player_name = player_name
             self.player_name_entered = True
         else:
-            print(self.text['sing_in_errors'][0]['login_error'])
+            print(self.text['sing_in_errors']['login_error'])
             self.remaining_log_attempts -= 1
 
     def password_enter(self):
-        player_password = getpass.getpass(prompt=self.text["sing_in_messages"][0]["password"])
+        player_password = getpass.getpass(prompt=self.text["sing_in_messages"]["password"])
         password_query = f"SELECT userpassword FROM users WHERE username = '{self.player_name}';"
         if general_functions.querying_data(password_query, self.db_config_location)[0][0] == player_password:
             self.player_password = player_password
             self.player_password_entered = True
             print(self.text['successful_authorization'])
         else:
-            print(self.text['sing_in_errors'][0]['password_error'])
+            print(self.text['sing_in_errors']['password_error'])
             self.remaining_log_attempts -= 1
+
+    def get_new_login(self):
+        new_account_login = input(self.text['sing_up_messages']['login'])
+        if
+
+    def get_new_password(self):
+        new_account_password = input(self.text['sing_up_messages']['password'])
+
+    def create_an_account(self):
+        new_login_getted = False
+        new_password_getted = False
+        new_account_login = self.get_new_login()
+        new_account_password = self.get_new_password()
 
     def authorization_main(self, text):
         self.text = text
@@ -110,7 +122,7 @@ class MenuClass(LeaderBoardClass, GameClass):
 
     def choosing_action(self):
         if self.menu_first_launch:
-            print(self.text['greeting'],end='')
+            print(self.text['greeting'], end='')
             self.menu_first_launch = False
         print(''.join(self.text["menu_text"]), end='')
         self.num_of_action = general_functions.get_correct_number('123', self.text['not_correct_value'])

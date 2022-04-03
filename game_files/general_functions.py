@@ -8,7 +8,7 @@ import random
 
 def is_file_exist(file_name):
     if not exists(file_name):
-        raise NameError('Wrong location/name of file',file_name)
+        raise NameError('Wrong location/name of file', file_name)
 
 
 def parse_program_text(file_name):
@@ -61,3 +61,7 @@ def get_yes_no(start_message, error_messages):
                 return entered_text
             case _:
                 entered_text = input(random.choice(error_messages)).lower()
+
+
+def is_english_text(text):
+    return text.isasscii()
