@@ -2,6 +2,8 @@ import random
 import general_functions
 import os
 import sys
+import pwinput
+import getpass
 
 
 class LeaderBoardClass:
@@ -20,8 +22,8 @@ class LeaderBoardClass:
         while True:
             match choose_in_menu.lower():
                 case "yes":
-                    menu.main()
-                    break
+                    print()
+                    return menu.main()
                 case "no": sys.exit(self.text['parting'])
                 case _: choose_in_menu = input(random.choice(self.text['not_correct_value']))
 
@@ -37,16 +39,17 @@ class AuthorizationClass:
     player_name_entered = False
     player_password = ""
     player_password_entered = False
-    remaining_log_attempts = 5
+    remaining_log_attempts = 3
 
     def account_menu(self):
         print(''.join(self.text["game_logging_menu"]), end='')
-        match general_functions.get_correct_number('123', self.text['not_correct_value']):
+        match general_functions.get_correct_number('1234', self.text['not_correct_value']):
             case '1': self.account_sign_in()
             case '2':
                 pass
             case '3':
                 pass
+            case '4': return menu.main()
 
     def account_sign_in(self):
         while True:
@@ -62,28 +65,32 @@ class AuthorizationClass:
     def zero_log_attempts(self):
         match general_functions.get_yes_no(self.text['after_errors_offer'], self.text['not_correct_value']):
             case 'yes':
+                self.remaining_log_attempts = 3
                 return self.account_menu()
             case 'no':
-                self.remaining_log_attempts = 5
+                self.remaining_log_attempts = 2
 
     def login_enter(self):
         player_name = input(self.text['sing_in_messages'][0]['login'])
         name_query = f"SELECT userpassword FROM users WHERE username = '{player_name}';"
         if len(general_functions.querying_data(name_query, self.db_config_location)) > 0:
+            print(self.text['sing_in_messages'][0]['correct_login'])
             self.player_name = player_name
             self.player_name_entered = True
         else:
             print(self.text['sing_in_errors'][0]['login_error'])
+            self.remaining_log_attempts -= 1
 
     def password_enter(self):
-        first_try = True
-        player_password = input(self.text['sing_in_messages'][0]['password'])
+        player_password = getpass.getpass(prompt=self.text["sing_in_messages"][0]["password"])
         password_query = f"SELECT userpassword FROM users WHERE username = '{self.player_name}';"
-        if general_functions.querying_data(password_query, self.db_config_location) == player_password:
+        if general_functions.querying_data(password_query, self.db_config_location)[0][0] == player_password:
             self.player_password = player_password
             self.player_password_entered = True
+            print(self.text['successful_authorization'])
         else:
             print(self.text['sing_in_errors'][0]['password_error'])
+            self.remaining_log_attempts -= 1
 
     def authorization_main(self, text):
         self.text = text
@@ -103,9 +110,9 @@ class MenuClass(LeaderBoardClass, GameClass):
 
     def choosing_action(self):
         if self.menu_first_launch:
-            print(self.text['greeting'])
+            print(self.text['greeting'],end='')
             self.menu_first_launch = False
-        print(self.text['menu_text'], end='')
+        print(''.join(self.text["menu_text"]), end='')
         self.num_of_action = general_functions.get_correct_number('123', self.text['not_correct_value'])
 
     def launch_selected_action(self):
