@@ -30,7 +30,7 @@ def postgresql_config_parser(file_name='database.ini'):
     return ' '.join(db)
 
 
-def querying_data(query, db_config_loc="database.ini"):
+def querying_db_data(query, db_config_loc="database.ini"):
     connection = None
     query_data = []
     try:
@@ -42,6 +42,25 @@ def querying_data(query, db_config_loc="database.ini"):
     finally:
         if connection is not None:
             connection.close()
+
+
+def insert_to_db(query, db_config_loc="database.ini"):
+    connection = None
+    try:
+        connection = psycopg2.connect(postgresql_config_parser(db_config_loc))
+        connection.autocommit = True
+        cursor = connection.cursor()
+        cursor.execute(query)
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+def is_name_original(name, db_to_connect):
+    name_query = f"SELECT userpassword FROM users WHERE username = '{name}';"
+    if len(querying_db_data(name_query, db_to_connect)) == 0:
+        return True
+    return False
 
 
 def get_correct_number(correct_values, error_messages):
@@ -64,4 +83,10 @@ def get_yes_no(start_message, error_messages):
 
 
 def is_english_text(text):
-    return text.isasscii()
+    return text.isascii()
+
+
+def is_correct_len(text, max_len):
+    if 1 <= len(text) <= max_len:
+        return True
+    return False

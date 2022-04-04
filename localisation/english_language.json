@@ -30,8 +30,13 @@
                          "password": "\nEnter your password: "},
   "sing_in_errors" : {"login_error":  "Such a login does not exist", "password_error": "Wrong password"},
   "after_errors_offer" : "\nMaybe you want to return to the authorization menu?\nEnter 'yes' or 'no'\n= ",
-  "successful_authorization": "Authorization completed successfully. Now, you can play.\n",
-  "sing_up_messages": {"login": "Please, enter name(login) for your new account: ",
+  "successfully_authorization": "Authorization completed successfully. Now, you can play.\n",
+  "sing_up_messages": {"login": "\nPlease, enter name(login) for your new account: ",
                         "password": "Please, enter password for your new account: ",
-                        "confirm_password": "Enter your password one more time: "}
+                        "confirm_password": "Enter your password one more time: "},
+  "sing_up_errors": {"len": "Amount of chars should be at least more than 0 and less than ",
+                     "latin": "Please, use only the Latin alphabet",
+                     "existing_name": "That name is already exist",
+                     "wrong_password_confirmation": "You entered two different passwords. Try again"},
+  "successfully_account_creation": "Account creation went successfully."
 }
