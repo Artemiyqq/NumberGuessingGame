@@ -82,10 +82,6 @@ def get_yes_no(start_message, error_messages):
                 entered_text = input(random.choice(error_messages)).lower()
 
 
-def is_english_text(text):
-    return text.isascii()
-
-
 def is_correct_len(text, max_len):
     if 1 <= len(text) <= max_len:
         return True

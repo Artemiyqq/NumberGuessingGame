@@ -5,7 +5,7 @@ import sys
 import getpass
 
 
-class LeaderBoardClass:
+class LeaderboardClass:
     def print_top10(self):
         print(self.text['leader_board_message'])
         top_players = general_functions.querying_db_data("SELECT * FROM leader_board ORDER BY userscore DESC",
@@ -16,6 +16,8 @@ class LeaderBoardClass:
             except IndexError:
                 print(f'{some_of_top[1]} ...')
 
+
+class LeaderboardMenuClass(LeaderboardClass):
     def leader_board_menu(self):
         choose_in_menu = input(self.text['leader_board_menu'])
         while True:
@@ -26,28 +28,13 @@ class LeaderBoardClass:
                 case "no": sys.exit(self.text['parting'])
                 case _: choose_in_menu = input(random.choice(self.text['not_correct_value']))
 
-    def leader_board_main(self, text):
-        self.text = text
-        self.print_top10()
-        self.leader_board_menu()
 
-
-class AuthorizationClass:
-    db_config_location = os.path.realpath('..\\database.ini')
+class SignInClass:
     player_name = ""
     player_name_entered = False
     player_password = ""
     player_password_entered = False
     remaining_log_attempts = 3
-
-    def account_menu(self):
-        print(''.join(self.text["game_logging_menu"]), end='')
-        match general_functions.get_correct_number('1234', self.text['not_correct_value']):
-            case '1': self.account_sign_in()
-            case '2': self.create_an_account()
-            case '3':
-                pass
-            case '4': return menu.main()
 
     def account_sign_in(self):
         while True:
@@ -89,12 +76,14 @@ class AuthorizationClass:
             print(self.text['sing_in_errors']['password_error'])
             self.remaining_log_attempts -= 1
 
+
+class SignUpClass:
     def get_new_login(self):
         while True:
             new_account_login = input(self.text['sing_up_messages']['login'])
             if not general_functions.is_correct_len(new_account_login, 15):
                 print(self.text['sing_up_errors']['len'], end='16\n')
-            elif not general_functions.is_english_text(new_account_login):
+            elif not new_account_login.isascii():
                 print(self.text['sing_up_errors']['latin'])
             elif not general_functions.is_name_original(new_account_login, self.db_config_location):
                 print(self.text['sing_up_errors']['existing_name'])
@@ -117,45 +106,61 @@ class AuthorizationClass:
     def create_an_account(self):
         new_account_login = self.get_new_login()
         new_account_password = self.get_new_password()
-        account_creation_query = f"INSERT INTO users VALUES ('{new_account_login}','{new_account_password}');" \
-                                 f"INSERT INTO leader_board VALUES ('{new_account_login}');"
+        account_creation_query = f"""INSERT INTO users VALUES ('{new_account_login}','{new_account_password}');
+                                 INSERT INTO leader_board VALUES ('{new_account_login}');"""
         general_functions.insert_to_db(account_creation_query, self.db_config_location)
         print(self.text['successfully_account_creation'])
         return self.account_menu()
 
-    def authorization_main(self, text):
-        self.text = text
-        self.account_menu()
+
+class AuthorizationMenuClass(SignInClass, SignUpClass):
+    db_config_location = os.path.realpath('..\\database.ini')
+
+    def account_menu(self):
+        print(''.join(self.text["game_logging_menu"]), end='')
+        match general_functions.get_correct_number('1234', self.text['not_correct_value']):
+            case '1': self.account_sign_in()
+            case '2': self.create_an_account()
+            case '3':
+                pass
+            case '4':
+                print()
+                return menu.main()
 
 
-class GameClass(AuthorizationClass):
-    def game_main(self, text):
-        self.authorization_main(self.text)
-        self.text = text
+class GameClass:
+    pass
 
 
-class MenuClass(LeaderBoardClass, GameClass):
-    choose_in_menu = ''
+class MainMenuClass:
     text = general_functions.parse_program_text(os.path.realpath('..\\localisation\\english_language.json'))
     menu_first_launch = True
 
-    def choosing_action(self):
+    def main_menu(self):
         if self.menu_first_launch:
             print(self.text['greeting'], end='')
             self.menu_first_launch = False
         print(''.join(self.text["menu_text"]), end='')
-        self.num_of_action = general_functions.get_correct_number('123', self.text['not_correct_value'])
-
-    def launch_selected_action(self):
-        match self.num_of_action:
-            case '1': super().game_main(self.text)
-            case '2': super().leader_board_main(self.text)
+        match general_functions.get_correct_number('123', self.text['not_correct_value']):
+            case '1': self.game_main()
+            case '2': self.leader_board_main()
             case '3': sys.exit(self.text['parting'])
 
+
+class AllClassesMenu(LeaderboardMenuClass, GameClass, AuthorizationMenuClass, MainMenuClass):
+    def game_main(self):
+        self.authorization_main()
+
+    def authorization_main(self):
+        self.account_menu()
+
+    def leader_board_main(self):
+        self.print_top10()
+        self.leader_board_menu()
+
     def main(self):
-        self.choosing_action()
-        self.launch_selected_action()
+        self.main_menu()
 
 
-menu = MenuClass()
+menu = AllClassesMenu()
 menu.main()
