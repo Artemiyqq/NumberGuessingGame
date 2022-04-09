@@ -1,15 +1,16 @@
 import random
-import general_functions
+import getpass
 import os
 import sys
-import getpass
+from modules.input_parsing import ParseInput
+from modules.work_with_files import File
+from modules.work_with_database import Database
 
 
 class LeaderboardClass:
     def print_top10(self):
         print(self.text['leader_board_message'])
-        top_players = general_functions.querying_db_data("SELECT * FROM leader_board ORDER BY userscore DESC",
-                                                         os.path.realpath("..\\database.ini"))
+        top_players = Database.querying_db_data("SELECT * FROM leader_board ORDER BY userscore DESC")
         for some_of_top in enumerate(self.text['top10']):
             try:
                 print(f'{some_of_top[1]} {top_players[some_of_top[0]][0]} with {top_players[some_of_top[0]][1]} p.')
@@ -48,7 +49,7 @@ class SignInClass:
                 break
 
     def zero_log_attempts(self):
-        match general_functions.get_yes_no(self.text['after_errors_offer'], self.text['not_correct_value']):
+        match ParseInput.get_yes_no(self.text['after_errors_offer'], self.text['not_correct_value']):
             case 'yes':
                 self.remaining_log_attempts = 3
                 return self.account_menu()
@@ -57,7 +58,7 @@ class SignInClass:
 
     def login_enter(self):
         player_name = input(self.text['sing_in_messages']['login'])
-        if not general_functions.is_name_original(player_name, self.db_config_location):
+        if not Database.is_name_original(player_name):
             print(self.text['sing_in_messages']['correct_login'])
             self.player_name = player_name
             self.player_name_entered = True
@@ -68,7 +69,7 @@ class SignInClass:
     def password_enter(self):
         player_password = getpass.getpass(prompt=self.text["sing_in_messages"]["password"])
         password_query = f"SELECT userpassword FROM users WHERE username = '{self.player_name}';"
-        if general_functions.querying_db_data(password_query, self.db_config_location)[0][0] == player_password:
+        if Database.querying_db_data(password_query)[0][0] == player_password:
             self.player_password = player_password
             self.player_password_entered = True
             print(self.text['successfully_authorization'])
@@ -81,11 +82,11 @@ class SignUpClass:
     def get_new_login(self):
         while True:
             new_account_login = input(self.text['sing_up_messages']['login'])
-            if not general_functions.is_correct_len(new_account_login, 15):
+            if not ParseInput.is_correct_len(new_account_login, 15):
                 print(self.text['sing_up_errors']['len'], end='16\n')
             elif not new_account_login.isascii():
                 print(self.text['sing_up_errors']['latin'])
-            elif not general_functions.is_name_original(new_account_login, self.db_config_location):
+            elif not Database.is_name_original(new_account_login):
                 print(self.text['sing_up_errors']['existing_name'])
             else:
                 return new_account_login
@@ -93,9 +94,9 @@ class SignUpClass:
     def get_new_password(self):
         while True:
             new_account_password = getpass.getpass(prompt=self.text['sing_up_messages']['password'])
-            if not general_functions.is_correct_len(new_account_password, 20):
+            if not ParseInput.is_correct_len(new_account_password, 20):
                 print(self.text['sing_up_errors']['len'], end='21\n')
-            elif not general_functions.is_english_text(new_account_password):
+            elif not new_account_password.isascii():
                 print(self.text['sing_up_errors']['latin'])
             else:
                 if getpass.getpass(self.text['sing_up_messages']['confirm_password']) == new_account_password:
@@ -107,18 +108,16 @@ class SignUpClass:
         new_account_login = self.get_new_login()
         new_account_password = self.get_new_password()
         account_creation_query = f"""INSERT INTO users VALUES ('{new_account_login}','{new_account_password}');
-                                 INSERT INTO leader_board VALUES ('{new_account_login}');"""
-        general_functions.insert_to_db(account_creation_query, self.db_config_location)
+                                     INSERT INTO leader_board VALUES ('{new_account_login}');"""
+        Database.insert_to_db(account_creation_query)
         print(self.text['successfully_account_creation'])
         return self.account_menu()
 
 
 class AuthorizationMenuClass(SignInClass, SignUpClass):
-    db_config_location = os.path.realpath('..\\database.ini')
-
     def account_menu(self):
         print(''.join(self.text["game_logging_menu"]), end='')
-        match general_functions.get_correct_number('1234', self.text['not_correct_value']):
+        match ParseInput.get_correct_number('1234', self.text['not_correct_value']):
             case '1': self.account_sign_in()
             case '2': self.create_an_account()
             case '3':
@@ -133,7 +132,7 @@ class GameClass:
 
 
 class MainMenuClass:
-    text = general_functions.parse_program_text(os.path.realpath('..\\localisation\\english_language.json'))
+    text = File.parse_program_text(os.path.realpath('localisation\\english_language.json'))
     menu_first_launch = True
 
     def main_menu(self):
@@ -141,7 +140,7 @@ class MainMenuClass:
             print(self.text['greeting'], end='')
             self.menu_first_launch = False
         print(''.join(self.text["menu_text"]), end='')
-        match general_functions.get_correct_number('123', self.text['not_correct_value']):
+        match ParseInput.get_correct_number('123', self.text['not_correct_value']):
             case '1': self.game_main()
             case '2': self.leader_board_main()
             case '3': sys.exit(self.text['parting'])
