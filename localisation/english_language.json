@@ -38,5 +38,19 @@
                      "latin": "Please, use only the Latin alphabet",
                      "existing_name": "That name is already exist",
                      "wrong_password_confirmation": "You entered two different passwords. Try again"},
-  "successfully_account_creation": "Account creation went successfully."
+  "successfully_account_creation": "Account creation went successfully.",
+  "exit_possibility": "In any moment you can return to main menu by entering 'exit'\n",
+  "game_rules": "Amount of nums in chosen range = amount of max. possible points for win.\nEvery wrong try = -1 point from possible win(you can't go into the red). ",
+  "nums_range_menu": ["Please, choose the range of nums(includes the first and last nums.):\n",
+                      "1. 1-5\n",
+                      "2. 1-10\n",
+                      "3. 1-20\n",
+                      "= "],
+  "out_of_range" : "This number is not even in range, but okay...\nMaybe this time you will guess?\n= ",
+  "win_message" : ["Congratulations! You won!\nFor the victory you get", "point(s)"],
+  "after_win_menu" : ["What are we going to do now?\n",
+                      "Please? choose the num:\n",
+                      "1. Let's play one more game\n",
+                      "2. Return to the main menu\n",
+                      "= "]
 }
