@@ -3,13 +3,13 @@ import random
 
 class ParseInput:
     @staticmethod
-    def get_correct_number(correct_values, error_messages):
-        num_of_action = input()
+    def get_correct_value(correct_values, error_messages):
+        value = input()
         while True:
-            if not num_of_action in correct_values:
-                num_of_action = input(random.choice(error_messages))
+            if value.lower() in correct_values:
+                return value.lower()
             else:
-                return num_of_action
+                value = input(random.choice(error_messages))
 
     @staticmethod
     def get_yes_no(start_message, error_messages):

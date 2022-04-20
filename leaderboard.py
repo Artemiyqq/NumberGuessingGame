@@ -1,6 +1,7 @@
 import sys
 import random
 from modules.database_postgresql import Database
+from modules.input_parsing import ParseInput
 
 
 class LeaderboardClass:
@@ -16,11 +17,8 @@ class LeaderboardClass:
 
 class LeaderboardMenuClass(LeaderboardClass):
     def leader_board_menu(self):
-        choose_in_menu = input(self.text['leader_board_menu'])
-        while True:
-            match choose_in_menu.lower():
-                case "yes":
-                    print()
-                    return self.main()
-                case "no": sys.exit(self.text['parting'])
-                case _: choose_in_menu = input(random.choice(self.text['not_correct_value']))
+        match ParseInput.get_yes_no(self.text['leader_board_menu'], self.text['not_correct_value']):
+            case "yes":
+                print()
+                return self.main()
+            case "no": sys.exit(self.text['parting'])

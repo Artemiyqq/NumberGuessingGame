@@ -9,6 +9,7 @@ class SignInClass:
     player_password = ""
     player_password_entered = False
     remaining_log_attempts = 3
+    play_without_account = False
 
     def account_sign_in(self):
         while True:
@@ -90,12 +91,10 @@ class SignUpClass:
 class AuthorizationMenuClass(SignInClass, SignUpClass):
     def account_menu(self):
         print(''.join(self.text["game_logging_menu"]), end='')
-        match ParseInput.get_correct_number('1234', self.text['not_correct_value']):
+        match ParseInput.get_correct_value(['1', '2', '3', '4'], self.text['not_correct_value']):
             case '1': self.account_sign_in()
             case '2': self.create_an_account()
-            case '3':
-                pass
+            case '3': self.play_without_account = True
             case '4':
                 print()
                 return self.main()
-

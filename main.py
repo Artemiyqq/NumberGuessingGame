@@ -7,6 +7,7 @@ from main_menu import MainMenuClass
 class AllClassesMenu(LeaderboardMenuClass, GameMenuClass, AuthorizationMenuClass, MainMenuClass):
     def game_main(self):
         self.authorization_main()
+        self.start_the_game()
 
     def authorization_main(self):
         self.account_menu()

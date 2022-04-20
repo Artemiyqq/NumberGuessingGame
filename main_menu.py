@@ -13,7 +13,7 @@ class MainMenuClass:
             print(self.text['greeting'], end='')
             self.menu_first_launch = False
         print(''.join(self.text["menu_text"]), end='')
-        match ParseInput.get_correct_number('123', self.text['not_correct_value']):
+        match ParseInput.get_correct_value(['1', '2', '3'], self.text['not_correct_value']):
             case '1': self.game_main()
             case '2': self.leader_board_main()
             case '3': sys.exit(self.text['parting'])
