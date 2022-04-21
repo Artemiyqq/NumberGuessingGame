@@ -40,9 +40,10 @@
                      "wrong_password_confirmation": "You entered two different passwords. Try again"},
   "successfully_account_creation": "Account creation went successfully.",
   "exit_possibility": "\nIn any moment you can return to main menu by entering 'exit'.\n",
+  "need_of_tutorial": "\nDo you want to read the rules?\nPlease, enter 'yes' or 'no'\n= ",
   "game_rules": ["\nAmount of nums in chosen range = amount of max. possible points for win.\n",
                  "Every wrong try = -1 point from possible win points(you can't go into the red).\n"],
-  "nums_range_menu": ["Please, choose the range of nums(includes the first and last nums.):\n",
+  "nums_range_menu": ["\nPlease, choose the range of nums(includes the first and last nums.):\n",
                       "1. 1-5\n",
                       "2. 1-10\n",
                       "3. 1-20\n",
@@ -53,5 +54,8 @@
                       "Please? choose the num:\n",
                       "1. Let's play one more game\n",
                       "2. Return to the main menu\n",
-                      "= "]
+                      "= "],
+  "num_entering_massages": ["\nNum is guessed\nLet's start\n","Enter your num: "],
+  "guessing_num_errors": {"not_num":"The input you entered is not a number (no point will be deducted for it)"},
+  "wrong_intend": "Wrong! Try again!\n= "
 }

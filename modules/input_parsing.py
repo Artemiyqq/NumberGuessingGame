@@ -3,8 +3,8 @@ import random
 
 class ParseInput:
     @staticmethod
-    def get_correct_value(correct_values, error_messages):
-        value = input()
+    def get_correct_value(correct_values, error_messages, message_in_input=''):
+        value = input(message_in_input)
         while True:
             if value.lower() in correct_values:
                 return value.lower()
