@@ -37,3 +37,7 @@ class Database:
         if len(cls.querying_db_data(name_query)) == 0:
             return True
         return False
+
+    @classmethod
+    def update_user_score(cls, user_name, user_password, win_points):
+        cls.insert_to_db()

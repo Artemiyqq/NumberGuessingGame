@@ -1,6 +1,7 @@
-from time import sleep
 import random
+from time import sleep
 from modules.input_parsing import ParseInput
+from modules.database_postgresql import Database
 
 
 class GameClass:
@@ -39,22 +40,35 @@ class GameClass:
         else:
             self.points_for_win -= 1
             self.probable_value = str(input(self.text['wrong_intend']))
-    
+
+    def player_inputted_exit(self):
+        if self.probable_value == 'exit':
+            self.continue_guessing = False
+            print()
+            return self.main_menu()
+
+    def check_probable_value(self):
+        if int(self.probable_value) in self.num_ranges[self.chosen_num_range]:
+            self.is_correct_assumption()
+        else:
+            self.probable_value = str(input(self.text['out_of_range']))
+
     def win(self):
-        pass
+        self.continue_guessing = False
+        print(self.text['win_message'][0], self.points_for_win, self.text['win_message'][1])
+        if not self.play_without_account:
+            p
 
     def guess_the_number(self):
+        self.continue_guessing = True
         print(self.text["num_entering_massages"][0])
         self.probable_value = str(input(self.text['num_entering_massages'][1])).lower()
         while self.continue_guessing:
-            if self.probable_value == 'exit':
-                self.continue_guessing = False
-                return self.main_menu
-            elif self.probable_value.isdigit():
-                if int(self.probable_value) in self.num_ranges[self.chosen_num_range]:
-                    self.is_correct_assumption()
-                else:
-                    self.probable_value = str(input(self.text['out_of_range']))
+            self.player_inputted_exit()
+            if self.probable_value.isdigit():
+                self.check_probable_value()
+            elif self.continue_guessing:
+                self.probable_value = str(input(self.text['not_num_value'])).lower()
 
 
 class GameMenuClass(GameClass):

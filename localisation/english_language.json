@@ -56,6 +56,6 @@
                       "2. Return to the main menu\n",
                       "= "],
   "num_entering_massages": ["\nNum is guessed\nLet's start\n","Enter your num: "],
-  "guessing_num_errors": {"not_num":"The input you entered is not a number (no point will be deducted for it)"},
+  "not_num_value": "The input you entered is not a number (no point will be deducted for it)\n= ",
   "wrong_intend": "Wrong! Try again!\n= "
 }
