@@ -1,5 +1,5 @@
 import sys
-import random
+from time import sleep
 from modules.database_postgresql import Database
 from modules.input_parsing import ParseInput
 
@@ -13,6 +13,7 @@ class LeaderboardClass:
                 print(f'{some_of_top[1]} {top_players[some_of_top[0]][0]} with {top_players[some_of_top[0]][1]} p.')
             except IndexError:
                 print(f'{some_of_top[1]} ...')
+        sleep(4)
 
 
 class LeaderboardMenuClass(LeaderboardClass):

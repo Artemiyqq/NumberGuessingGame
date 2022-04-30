@@ -1,13 +1,27 @@
 {
   "greeting" : "\nHello! Let's start!\n",
-  "menu_text" : ["Choose the action by num:\n",
-                 "1. To start a game\n",
-                 "2. To check a leaderboard\n",
-                 "3. To exit from the game\n= "],
-  "not_correct_value" : ["Incorrect value was inputted! Please, try again.\n= ",
-                         "This value doesn't fit! You should try once more time...\n= "],
-  "parting" : "See you!",
+
   "leader_board_message": "\nLeaderboard of 10 best players in scoring:",
+
+  "parting" : "See you!",
+
+  "sing_in_messages" : {"login":  "\nPlease, enter your login: ",
+                        "correct_login": "Correct login",
+                        "password": "\nEnter your password: "},
+
+  "successfully_authorization": "Authorization completed successfully. Now, you can play.\n",
+
+  "successfully_account_creation": "Account creation went successfully.",
+
+  "num_entering_massages": ["\nNum is guessed\nLet's start\n","Enter your num: "],
+
+  "exit_possibility": "\nIn any moment you can return to main menu by entering 'exit'.\n",
+
+  "need_of_tutorial": "\nDo you want to read the rules?\nPlease, enter 'yes' or 'no'\n= ",
+
+  "game_rules": ["\nAmount of nums in chosen range = amount of max. possible points for win.\n",
+                 "Every wrong try = -1 point from possible win points(you can't go into the red).\n"],
+
   "top10" : ["Top 1 -",
              "Top 2 -",
              "Top 3 -",
@@ -18,44 +32,58 @@
              "Top 8 -",
              "Top 9 -",
              "Top 10 -"],
+
   "leader_board_menu" : "\nTo return to menu enter 'yes',\nif you want to exit from game enter 'no'\n= ",
+
+  "win_message" : ["Congratulations! You won!\nFor the victory you get", "point(s)"],
+
+
+
+  "menu_text" : ["Choose the action by num:\n",
+                 "1. To start a game\n",
+                 "2. To check a leaderboard\n",
+                 "3. To exit from the game\n= "],
+
+  "after_win_menu" : ["\nWhat are we going to do now?\n",
+                      "Please choose the num:\n",
+                      "1. Let's play one more game\n",
+                      "2. Return to the main menu\n",
+                      "= "],
+
   "game_logging_menu" : ["\nChoose the action by num:\n",
                          "1. I already have a game account\n",
                          "2. I want to create a game account\n",
                          "3. I want to play without an account(you will not be able to get into the leaderboard)\n",
                          "4. I want to return to main menu\n",
                          "= "],
-  "sing_in_messages" : {"login":  "\nPlease, enter your login: ",
-                         "correct_login": "Correct login",
-                         "password": "\nEnter your password: "},
-  "sing_in_errors" : {"login_error":  "Such a login does not exist", "password_error": "Wrong password"},
-  "after_errors_offer" : "\nMaybe you want to return to the authorization menu?\nEnter 'yes' or 'no'\n= ",
-  "successfully_authorization": "Authorization completed successfully. Now, you can play.\n",
-  "sing_up_messages": {"login": "\nPlease, enter name(login) for your new account: ",
-                        "password": "Please, enter password for your new account: ",
-                        "confirm_password": "Enter your password one more time: "},
-  "sing_up_errors": {"len": "Amount of chars should be at least more than 0 and less than ",
-                     "latin": "Please, use only the Latin alphabet",
-                     "existing_name": "That name is already exist",
-                     "wrong_password_confirmation": "You entered two different passwords. Try again"},
-  "successfully_account_creation": "Account creation went successfully.",
-  "exit_possibility": "\nIn any moment you can return to main menu by entering 'exit'.\n",
-  "need_of_tutorial": "\nDo you want to read the rules?\nPlease, enter 'yes' or 'no'\n= ",
-  "game_rules": ["\nAmount of nums in chosen range = amount of max. possible points for win.\n",
-                 "Every wrong try = -1 point from possible win points(you can't go into the red).\n"],
+
   "nums_range_menu": ["\nPlease, choose the range of nums(includes the first and last nums.):\n",
                       "1. 1-5\n",
                       "2. 1-10\n",
                       "3. 1-20\n",
                       "= "],
+
+
+
+  "not_correct_value" : ["Incorrect value was inputted! Please, try again.\n= ",
+                         "This value doesn't fit! You should try once more time...\n= "],
+
+  "sing_in_errors" : {"login_error":  "Such a login does not exist", "password_error": "Wrong password"},
+
+  "after_errors_offer" : "\nMaybe you want to return to the authorization menu?\nEnter 'yes' or 'no'\n= ",
+
+  "sing_up_messages": {"login": "\nPlease, enter name(login) for your new account: ",
+                        "password": "Please, enter password for your new account: ",
+                        "confirm_password": "Enter your password one more time: "},
+
+  "sing_up_errors": {"len": "Amount of chars should be at least more than 0 and less than ",
+                     "latin": "Please, use only the Latin alphabet",
+                     "existing_name": "That name is already exist",
+                     "wrong_password_confirmation": "You entered two different passwords. Try again"},
+
   "out_of_range" : "This number is not even in range, but okay...\nMaybe this time you will guess?\n= ",
-  "win_message" : ["Congratulations! You won!\nFor the victory you get", "point(s)"],
-  "after_win_menu" : ["What are we going to do now?\n",
-                      "Please? choose the num:\n",
-                      "1. Let's play one more game\n",
-                      "2. Return to the main menu\n",
-                      "= "],
-  "num_entering_massages": ["\nNum is guessed\nLet's start\n","Enter your num: "],
+
   "not_num_value": "The input you entered is not a number (no point will be deducted for it)\n= ",
+
   "wrong_intend": "Wrong! Try again!\n= "
 }

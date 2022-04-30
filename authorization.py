@@ -1,15 +1,16 @@
 from modules.input_parsing import ParseInput
 from modules.database_postgresql import Database
+from time import sleep
 import getpass
 
 
 class SignInClass:
-    player_name = ""
+    player_name = None
     player_name_entered = False
-    player_password = ""
+    player_password = None
     player_password_entered = False
-    remaining_log_attempts = 3
     play_without_account = False
+    remaining_log_attempts = 3
 
     def account_sign_in(self):
         while True:
@@ -46,7 +47,8 @@ class SignInClass:
         if Database.querying_db_data(password_query)[0][0] == player_password:
             self.player_password = player_password
             self.player_password_entered = True
-            print(self.text['successfully_authorization'])
+            print(self.text['successfully_authorization'], end='')
+            sleep(2)
         else:
             print(self.text['sing_in_errors']['password_error'])
             self.remaining_log_attempts -= 1

@@ -39,5 +39,8 @@ class Database:
         return False
 
     @classmethod
-    def update_user_score(cls, user_name, user_password, win_points):
-        cls.insert_to_db()
+    def update_user_score(cls, user_name, win_points):
+        query_for_update = f"""UPDATE leader_board
+                               SET userscore = userscore + {win_points}
+                               WHERE username = '{user_name}';"""
+        cls.insert_to_db(query_for_update)
