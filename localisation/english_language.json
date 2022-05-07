@@ -42,7 +42,8 @@
   "menu_text" : ["Choose the action by num:\n",
                  "1. To start a game\n",
                  "2. To check a leaderboard\n",
-                 "3. To exit from the game\n= "],
+                 "3. Змінити мову на українську\n",
+                 "4. To exit from the game\n= "],
 
   "after_win_menu" : ["\nWhat are we going to do now?\n",
                       "Please choose the num:\n",
