@@ -13,5 +13,5 @@ class MainMenuClass:
         match ParseInput.get_correct_value(['1', '2', '3', '4'], self.text['not_correct_value']):
             case '1': self.game_main()
             case '2': self.leader_board_main()
-            case '3': self.language_main()
+            case '3': self.change_language_main()
             case '4': sys.exit(self.text['parting'])

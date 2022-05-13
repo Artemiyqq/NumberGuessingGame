@@ -18,7 +18,8 @@ class AllClassesMenu(LeaderboardMenuClass, GameMenuClass, AuthorizationMenuClass
         self.leader_board_menu()
 
     def change_language_main(self):
-        pass
+        self.change_language()
+        self.main()
 
     def main(self):
         self.main_menu()
