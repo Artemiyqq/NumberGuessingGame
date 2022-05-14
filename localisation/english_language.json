@@ -1,5 +1,5 @@
 {
-  "greeting" : "\nHello! Let's start!\n",
+  "greeting" : "\nHello!\n",
 
   "leader_board_message": "\nLeaderboard of 10 best players in scoring:",
 
@@ -22,6 +22,10 @@
   "game_rules": ["\nAmount of nums in chosen range = amount of max. possible points for win.\n",
                  "Every wrong try = -1 point from possible win points(you can't go into the red).\n"],
 
+  "leader_board_menu" : "\nTo return to menu enter 'yes'\nIf you want to exit from game enter 'no'\n= ",
+
+  "win_message" : ["Congratulations! You won!\nFor the victory you get", "point(s)"],
+
   "top10" : ["Top 1 -",
              "Top 2 -",
              "Top 3 -",
@@ -33,12 +37,6 @@
              "Top 9 -",
              "Top 10 -"],
 
-  "leader_board_menu" : "\nTo return to menu enter 'yes',\nif you want to exit from game enter 'no'\n= ",
-
-  "win_message" : ["Congratulations! You won!\nFor the victory you get", "point(s)"],
-
-
-
   "menu_text" : ["Choose the action by num:\n",
                  "1. To start a game\n",
                  "2. To check a leaderboard\n",
@@ -46,7 +44,6 @@
                  "4. To exit from the game\n= "],
 
   "after_win_menu" : ["\nWhat are we going to do now?\n",
-                      "Please choose the num:\n",
                       "1. Let's play one more game\n",
                       "2. Return to the main menu\n",
                       "= "],
