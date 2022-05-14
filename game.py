@@ -21,18 +21,14 @@ class GameClass:
             print(''.join(self.text['game_rules']))
             sleep(10)
 
-    def get_nums_range(self):
+    def generate_num(self):
         self.chosen_num_range = ParseInput.get_correct_value(['1', '2', '3', 'exit'],
                                                              self.text['not_correct_value'],
                                                              ''.join(self.text['nums_range_menu']))
-        if self.chosen_num_range == 'exit':
-            return self.main_menu
-
-    def set_win_points(self):
-        self.points_for_win = int(len(self.num_ranges[self.chosen_num_range]))
-
-    def choose_the_num(self):
-        self.guessed_number = str(random.choice(self.num_ranges[self.chosen_num_range]))
+        self.player_inputted_exit()
+        if self.continue_guessing:
+            self.points_for_win = int(len(self.num_ranges[self.chosen_num_range]))
+            self.guessed_number = str(random.choice(self.num_ranges[self.chosen_num_range]))
 
     def is_correct_assumption(self):
         if self.probable_value == self.guessed_number:
@@ -43,7 +39,7 @@ class GameClass:
             self.probable_value = str(input(self.text['wrong_intend']))
 
     def player_inputted_exit(self):
-        if self.probable_value == 'exit':
+        if self.probable_value == 'exit' or self.chosen_num_range == 'exit':
             self.continue_guessing = False
             print()
             return self.main_menu()
@@ -94,9 +90,7 @@ class GameMenuClass(GameClass):
     def start_the_game(self):
         self.set_pregame_settings()
         self.game_start_messages()
-        self.get_nums_range()
-        self.set_win_points()
-        self.choose_the_num()
+        self.generate_num()
         self.guess_the_number()
 
     def after_win_menu(self):
